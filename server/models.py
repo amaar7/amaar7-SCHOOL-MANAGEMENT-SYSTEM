@@ -13,6 +13,7 @@ class Teacher(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     subject = db.Column(db.String(50), nullable=False)
+    classes = db.relationship('Class', backref='teacher', lazy=True)
 
 class Class(db.Model):
     id = db.Column(db.Integer, primary_key=True)
