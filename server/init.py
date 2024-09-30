@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_cors import CORS  
+from flask_cors import CORS
 from models import db
 
 def create_app():
@@ -11,11 +11,10 @@ def create_app():
 
     db.init_app(app)
     migrate = Migrate(app, db)
-
-    CORS(app)  
+    CORS(app)  # Enable CORS for cross-origin requests
 
     # Register blueprints
-    from routes import main
-    app.register_blueprint(main)
+    from routes import main as main_blueprint
+    app.register_blueprint(main_blueprint)
 
     return app
