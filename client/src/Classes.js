@@ -4,6 +4,8 @@ import './Classes.css';
 const Classes = () => {
     const [classes, setClasses] = useState([]);
     const [newClass, setNewClass] = useState({ name: '', teacher: '' });
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         fetch('http://localhost:5000/classes')
@@ -29,20 +31,32 @@ const Classes = () => {
             .then(data => {
                 setClasses([...classes, data]);
                 setNewClass({ name: '', teacher: '' });
+                setSuccessMessage('Class added successfully!');
+                setTimeout(() => setSuccessMessage(''), 3000);
             })
-            .catch(error => console.error('Error adding class:', error));
+            .catch(error => {
+                setErrorMessage('Error adding class');
+                setTimeout(() => setErrorMessage(''), 3000);
+                console.error('Error adding class:', error);
+            });
     };
 
     return (
         <div className="classes-container">
-            <h2>Class List</h2>
+            <h2 className="heading">Class List</h2>
             <ul className="class-list">
-                {classes.map(cl => (
-                    <li key={cl.id} className="class-card">
-                        {cl.name} (Teacher: {cl.teacher})
+                {classes.map(classItem => (
+                    <li key={classItem.id} className="class-card">
+                        <div className="class-info">
+                            <span className="class-name">{classItem.name}</span>
+                            <span className="class-teacher">Teacher: {classItem.teacher}</span>
+                        </div>
                     </li>
                 ))}
             </ul>
+
+            {successMessage && <div className="success-message">{successMessage}</div>}
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
 
             <form className="class-form" onSubmit={handleSubmit}>
                 <input

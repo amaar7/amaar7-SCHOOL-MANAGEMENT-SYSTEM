@@ -4,6 +4,8 @@ import './Students.css';
 const Students = () => {
     const [students, setStudents] = useState([]);
     const [newStudent, setNewStudent] = useState({ name: '', grade: '' });
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         fetch('http://localhost:5000/students')
@@ -29,20 +31,32 @@ const Students = () => {
             .then(data => {
                 setStudents([...students, data]);
                 setNewStudent({ name: '', grade: '' });
+                setSuccessMessage('Student added successfully!');
+                setTimeout(() => setSuccessMessage(''), 3000);
             })
-            .catch(error => console.error('Error adding student:', error));
+            .catch(error => {
+                setErrorMessage('Error adding student');
+                setTimeout(() => setErrorMessage(''), 3000);
+                console.error('Error adding student:', error);
+            });
     };
 
     return (
         <div className="students-container">
-            <h2>Student List</h2>
+            <h2 className="heading">Student List</h2>
             <ul className="student-list">
                 {students.map(student => (
                     <li key={student.id} className="student-card">
-                        {student.name} (Grade: {student.grade})
+                        <div className="student-info">
+                            <span className="student-name">{student.name}</span>
+                            <span className="student-grade">Grade: {student.grade}</span>
+                        </div>
                     </li>
                 ))}
             </ul>
+
+            {successMessage && <div className="success-message">{successMessage}</div>}
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
 
             <form className="student-form" onSubmit={handleSubmit}>
                 <input
