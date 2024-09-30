@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Students.css';
 
 const Students = () => {
     const [students, setStudents] = useState([]);
@@ -33,14 +34,17 @@ const Students = () => {
     };
 
     return (
-        <div>
+        <div className="students-container">
             <h2>Student List</h2>
-            <ul>
+            <ul className="student-list">
                 {students.map(student => (
-                    <li key={student.id}>{student.name} (Grade: {student.grade})</li>
+                    <li key={student.id} className="student-card">
+                        {student.name} (Grade: {student.grade})
+                    </li>
                 ))}
             </ul>
-            <form onSubmit={handleSubmit}>
+
+            <form className="student-form" onSubmit={handleSubmit}>
                 <input
                     type="text"
                     name="name"

@@ -1,0 +1,140 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #0044cc;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar li {
+    margin-left: 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #ffcc00;
+}
+
+/* Main Content */
+.content-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    color: #0044cc;
+}
+
+/* Form and Lists */
+form {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+form input, form button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+form input {
+    flex: 1;
+    min-width: 200px;
+}
+
+form button {
+    background-color: #0044cc;
+    color: white;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #003399;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+/* Footer */
+.footer {
+    background-color: #0044cc;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar li {
+        margin: 10px 0;
+    }
+
+    .content-container {
+        padding: 10px;
+    }
+
+    form input, form button {
+        width: 100%;
+    }
+
+    form {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .navbar h1 {
+        font-size: 1.2rem;
+    }
+
+    .content-container {
+        padding: 5px;
+    }
+}

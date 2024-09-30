@@ -5,7 +5,7 @@ import Teachers from './Teachers';
 import Classes from './Classes';
 import Attendance from './Attendance';
 import Grades from './Grades';
-
+import './App.css';
 
 function App() {
     return (
