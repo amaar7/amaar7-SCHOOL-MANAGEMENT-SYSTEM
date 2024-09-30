@@ -1,69 +1,70 @@
 import React, { useState, useEffect } from 'react';
+import './Teachers.css';
 
-function Teachers() {
+const Teachers = () => {
     const [teachers, setTeachers] = useState([]);
-    const [name, setName] = useState('');
-    const [subject, setSubject] = useState('');
+    const [newTeacher, setNewTeacher] = useState({ name: '', subject: '' });
 
     useEffect(() => {
-        // Fetch teachers on component mount
         fetch('http://localhost:5000/teachers')
             .then(response => response.json())
             .then(data => setTeachers(data))
             .catch(error => console.error('Error fetching teachers:', error));
     }, []);
 
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewTeacher(prevState => ({ ...prevState, [name]: value }));
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const newTeacher = { name, subject };
-
         fetch('http://localhost:5000/teachers', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newTeacher),
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Teacher added:', data);
-                setTeachers([...teachers, newTeacher]);
-                setName('');
-                setSubject('');
+                setTeachers([...teachers, data]);
+                setNewTeacher({ name: '', subject: '' });
             })
             .catch(error => console.error('Error adding teacher:', error));
     };
 
     return (
-        <div>
-            <h2>Teachers List</h2>
-            <ul>
+        <div className="teachers-container">
+            <h2>Teacher List</h2>
+            <ul className="teacher-list">
                 {teachers.map(teacher => (
-                    <li key={teacher.id}>
-                        {teacher.name} - {teacher.subject}
+                    <li key={teacher.id} className="teacher-card">
+                        {teacher.name} (Subject: {teacher.subject})
                     </li>
                 ))}
             </ul>
 
-            <h2>Add a New Teacher</h2>
-            <form onSubmit={handleSubmit}>
+            <form className="teacher-form" onSubmit={handleSubmit}>
                 <input
                     type="text"
+                    name="name"
+                    value={newTeacher.name}
+                    onChange={handleInputChange}
                     placeholder="Teacher Name"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
+                    required
                 />
                 <input
                     type="text"
+                    name="subject"
+                    value={newTeacher.subject}
+                    onChange={handleInputChange}
                     placeholder="Subject"
-                    value={subject}
-                    onChange={e => setSubject(e.target.value)}
+                    required
                 />
                 <button type="submit">Add Teacher</button>
             </form>
         </div>
     );
-}
+};
 
 export default Teachers;

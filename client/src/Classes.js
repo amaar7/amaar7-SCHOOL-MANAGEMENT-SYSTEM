@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import './Classes.css';
 
 const Classes = () => {
     const [classes, setClasses] = useState([]);
-    const [newClass, setNewClass] = useState({ name: '', teacher_id: '' });
-    const [teachers, setTeachers] = useState([]);
+    const [newClass, setNewClass] = useState({ name: '', teacher: '' });
 
     useEffect(() => {
-        // Fetch classes and teachers from the backend
         fetch('http://localhost:5000/classes')
             .then(response => response.json())
             .then(data => setClasses(data))
             .catch(error => console.error('Error fetching classes:', error));
-
-        fetch('http://localhost:5000/teachers')
-            .then(response => response.json())
-            .then(data => setTeachers(data))
-            .catch(error => console.error('Error fetching teachers:', error));
     }, []);
 
     const handleInputChange = (e) => {
@@ -34,22 +28,23 @@ const Classes = () => {
             .then(response => response.json())
             .then(data => {
                 setClasses([...classes, data]);
-                setNewClass({ name: '', teacher_id: '' });
+                setNewClass({ name: '', teacher: '' });
             })
             .catch(error => console.error('Error adding class:', error));
     };
 
     return (
-        <div>
+        <div className="classes-container">
             <h2>Class List</h2>
-            <ul>
-                {classes.map(cls => (
-                    <li key={cls.id}>{cls.name} - Teacher ID: {cls.teacher_id}</li>
+            <ul className="class-list">
+                {classes.map(cl => (
+                    <li key={cl.id} className="class-card">
+                        {cl.name} (Teacher: {cl.teacher})
+                    </li>
                 ))}
             </ul>
 
-            <h2>Add New Class</h2>
-            <form onSubmit={handleSubmit}>
+            <form className="class-form" onSubmit={handleSubmit}>
                 <input
                     type="text"
                     name="name"
@@ -58,19 +53,14 @@ const Classes = () => {
                     placeholder="Class Name"
                     required
                 />
-                <select
-                    name="teacher_id"
-                    value={newClass.teacher_id}
+                <input
+                    type="text"
+                    name="teacher"
+                    value={newClass.teacher}
                     onChange={handleInputChange}
+                    placeholder="Teacher"
                     required
-                >
-                    <option value="">Select Teacher</option>
-                    {teachers.map(teacher => (
-                        <option key={teacher.id} value={teacher.id}>
-                            {teacher.name}
-                        </option>
-                    ))}
-                </select>
+                />
                 <button type="submit">Add Class</button>
             </form>
         </div>

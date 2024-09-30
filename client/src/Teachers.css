@@ -1,0 +1,54 @@
+.teachers-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-list {
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.teacher-card {
+    background-color: #e8f4f8;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.teacher-form input, .teacher-form button {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.teacher-form button {
+    background-color: #008080;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.teacher-form button:hover {
+    background-color: #006666;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .teacher-card {
+        padding: 8px;
+    }
+
+    .teacher-form input, .teacher-form button {
+        padding: 8px;
+    }
+}

@@ -1,0 +1,54 @@
+.classes-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.class-list {
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.class-card {
+    background-color: #f1f8e9;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.class-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.class-form input, .class-form button {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.class-form button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.class-form button:hover {
+    background-color: #388E3C;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .class-card {
+        padding: 8px;
+    }
+
+    .class-form input, .class-form button {
+        padding: 8px;
+    }
+}
