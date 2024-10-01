@@ -7,46 +7,42 @@ import classesIcon from './assets/classes.png';
 import gradeIcon from './assets/grade.png';
 import studentIcon from './assets/student.svg';
 import teacherIcon from './assets/teacher.png';
-import schoolIcon from './assets/school.png';
 
-const Sidebar = ({ collapsed, handleToggle }) => {
+const Sidebar = () => {
   return (
-    <nav className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+    <nav className="sidebar">
       <div className="sidebar-top">
-        <button className="toggle-btn" onClick={handleToggle}>
-          {collapsed ? '→' : '←'}
-        </button>
-        {!collapsed && <h3>School Management</h3>}
+        <h3>School Management</h3>
       </div>
       <ul className="sidebar-links">
         <li>
           <Link to="/students">
             <img src={studentIcon} alt="Students" className="icon" />
-            {!collapsed && <span>Students</span>}
+            <span>Students</span>
           </Link>
         </li>
         <li>
           <Link to="/teachers">
             <img src={teacherIcon} alt="Teachers" className="icon" />
-            {!collapsed && <span>Teachers</span>}
+            <span>Teachers</span>
           </Link>
         </li>
         <li>
           <Link to="/classes">
             <img src={classesIcon} alt="Classes" className="icon" />
-            {!collapsed && <span>Classes</span>}
+            <span>Classes</span>
           </Link>
         </li>
         <li>
           <Link to="/attendance">
             <img src={attendanceIcon} alt="Attendance" className="icon" />
-            {!collapsed && <span>Attendance</span>}
+            <span>Attendance</span>
           </Link>
         </li>
         <li>
           <Link to="/grades">
             <img src={gradeIcon} alt="Grades" className="icon" />
-            {!collapsed && <span>Grades</span>}
+            <span>Grades</span>
           </Link>
         </li>
       </ul>

@@ -9,7 +9,7 @@ import './App.css';
 import Sidebar from './Sidebar'; 
 
 function App() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   const handleToggle = () => {
     setCollapsed(!collapsed);
