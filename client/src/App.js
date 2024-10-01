@@ -1,34 +1,36 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Students from './Students';
 import Teachers from './Teachers';
 import Classes from './Classes';
 import Attendance from './Attendance';
 import Grades from './Grades';
 import './App.css';
+import Sidebar from './Sidebar'; 
 
 function App() {
-    return (
-        <Router>
-            <nav>
-                <ul>
-                    <li><Link to="/students">Students</Link></li>
-                    <li><Link to="/teachers">Teachers</Link></li>
-                    <li><Link to="/classes">Classes</Link></li>
-                    <li><Link to="/attendance">Attendance</Link></li>
-                    <li><Link to="/grades">Grades</Link></li>
-                </ul>
-            </nav>
+  const [collapsed, setCollapsed] = useState(false);
 
-            <Routes> {/* Wrap all Route components inside Routes */}
-                <Route path="/students" element={<Students />} />
-                <Route path="/teachers" element={<Teachers />} />
-                <Route path="/classes" element={<Classes />} />
-                <Route path="/attendance" element={<Attendance />} />
-                <Route path="/grades" element={<Grades />} />
-            </Routes>
-        </Router>
-    );
+  const handleToggle = () => {
+    setCollapsed(!collapsed);
+  };
+
+  return (
+    <div className={`app-container ${collapsed ? 'collapsed' : ''}`}>
+      <Router>
+        <Sidebar collapsed={collapsed} handleToggle={handleToggle} />
+        <main className="content-container">
+          <Routes>
+            <Route path="/students" element={<Students />} />
+            <Route path="/teachers" element={<Teachers />} />
+            <Route path="/classes" element={<Classes />} />
+            <Route path="/attendance" element={<Attendance />} />
+            <Route path="/grades" element={<Grades />} />
+          </Routes>
+        </main>
+      </Router>
+    </div>
+  );
 }
 
 export default App;
