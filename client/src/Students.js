@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './Students.css';
+import Modal from './Modal';
 
 const Students = () => {
     const [students, setStudents] = useState([]);
     const [newStudent, setNewStudent] = useState({ name: '', grade: '' });
+    const [showModal, setShowModal] = useState(false);
+    const [loading, setLoading] = useState(false); // Loading state
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -21,6 +24,7 @@ const Students = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true); // Start loading
 
         fetch('http://localhost:5000/students', {
             method: 'POST',
@@ -32,13 +36,15 @@ const Students = () => {
                 setStudents([...students, data]);
                 setNewStudent({ name: '', grade: '' });
                 setSuccessMessage('Student added successfully!');
+                setShowModal(false); // Close modal after successful submission
                 setTimeout(() => setSuccessMessage(''), 3000);
             })
             .catch(error => {
                 setErrorMessage('Error adding student');
                 setTimeout(() => setErrorMessage(''), 3000);
                 console.error('Error adding student:', error);
-            });
+            })
+            .finally(() => setLoading(false)); // End loading
     };
 
     return (
@@ -58,25 +64,33 @@ const Students = () => {
             {successMessage && <div className="success-message">{successMessage}</div>}
             {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-            <form className="student-form" onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="name"
-                    value={newStudent.name}
-                    onChange={handleInputChange}
-                    placeholder="Student Name"
-                    required
-                />
-                <input
-                    type="text"
-                    name="grade"
-                    value={newStudent.grade}
-                    onChange={handleInputChange}
-                    placeholder="Grade"
-                    required
-                />
-                <button type="submit">Add Student</button>
-            </form>
+            {/* Button to open modal */}
+            <button onClick={() => setShowModal(true)}>Add Student</button>
+
+            {/* Modal for adding new student */}
+            <Modal show={showModal} onClose={() => setShowModal(false)}>
+                <form className="student-form" onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        name="name"
+                        value={newStudent.name}
+                        onChange={handleInputChange}
+                        placeholder="Student Name"
+                        required
+                    />
+                    <input
+                        type="text"
+                        name="grade"
+                        value={newStudent.grade}
+                        onChange={handleInputChange}
+                        placeholder="Grade"
+                        required
+                    />
+                    <button type="submit" disabled={loading}>
+                        {loading ? 'Adding...' : 'Add Student'}
+                    </button>
+                </form>
+            </Modal>
         </div>
     );
 };

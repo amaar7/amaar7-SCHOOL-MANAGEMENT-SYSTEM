@@ -27,11 +27,98 @@
     padding: 20px;
     margin-left: 250px; /* Adjust this based on sidebar width */
     transition: margin-left 0.3s ease-in-out;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+/* Sidebar Heading Styles */
+.sidebar h3 {
+    font-size: 24px;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Sidebar Icon Styles */
+.sidebar-links a {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.sidebar-links a:hover {
+    background-color: #0033aa;
+}
+
+.sidebar-links a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.collapsed .sidebar-links a img {
+    margin: 0;
 }
 
 /* Main Heading Styles */
 h2 {
     color: #0044cc;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Form Styles */
+form {
+    margin-top: 20px;
+}
+
+form input,
+form select,
+form button {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%;
+}
+
+form button {
+    background-color: #0044cc;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+form button:hover {
+    background-color: #0033aa;
+}
+
+/* Success/Error Messages */
+.success-message,
+.error-message {
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.success-message {
+    background-color: #28a745;
+}
+
+.error-message {
+    background-color: #dc3545;
 }
 
 /* Responsiveness for smaller screens */
@@ -40,7 +127,31 @@ h2 {
         flex-direction: column;
     }
 
+    .collapsed .sidebar {
+        width: 60px;
+    }
+
     .content-container {
         margin-left: 0;
+        padding: 10px;
+    }
+
+    .sidebar h3 {
+        font-size: 18px;
+    }
+
+    .sidebar-links a {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    form input,
+    form select,
+    form button {
+        font-size: 14px;
+    }
+
+    h2 {
+        font-size: 24px;
     }
 }
