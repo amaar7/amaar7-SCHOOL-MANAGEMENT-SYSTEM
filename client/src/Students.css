@@ -52,11 +52,10 @@
 .student-form {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    gap: 15px;
 }
 
 .student-form input {
-    margin-bottom: 15px;
     padding: 12px;
     border-radius: 8px;
     border: 1px solid #ccc;
@@ -81,7 +80,9 @@
     background-color: #006666;
 }
 
-.success-message, .error-message {
+/* Success/Error Messages */
+.success-message,
+.error-message {
     margin: 10px 0;
     padding: 10px;
     text-align: center;
@@ -104,7 +105,8 @@
         padding: 20px;
     }
 
-    .student-form input, .student-form button {
+    .student-form input,
+    .student-form button {
         padding: 10px;
     }
 

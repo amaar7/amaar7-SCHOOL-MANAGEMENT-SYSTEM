@@ -78,13 +78,17 @@ h2 {
 /* Form Styles */
 form {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 form input,
 form select,
 form button {
     padding: 10px;
-    margin: 10px 0;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;

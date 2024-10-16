@@ -22,10 +22,11 @@
 .teacher-form {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
-.teacher-form input, .teacher-form button {
-    margin: 5px 0;
+.teacher-form input,
+.teacher-form button {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -48,7 +49,8 @@
         padding: 8px;
     }
 
-    .teacher-form input, .teacher-form button {
+    .teacher-form input,
+    .teacher-form button {
         padding: 8px;
     }
 }
