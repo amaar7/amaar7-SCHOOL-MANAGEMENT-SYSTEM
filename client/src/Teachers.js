@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import './Teachers.css';
+import Modal from './Modal';
 
 const Teachers = () => {
     const [teachers, setTeachers] = useState([]);
     const [newTeacher, setNewTeacher] = useState({ name: '', subject: '' });
-    const [successMessage, setSuccessMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
+        fetchTeachers();
+    }, []);
+
+    const fetchTeachers = () => {
         fetch('http://localhost:5000/teachers')
             .then(response => response.json())
             .then(data => setTeachers(data))
             .catch(error => console.error('Error fetching teachers:', error));
-    }, []);
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -21,6 +25,7 @@ const Teachers = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
 
         fetch('http://localhost:5000/teachers', {
             method: 'POST',
@@ -31,52 +36,49 @@ const Teachers = () => {
             .then(data => {
                 setTeachers([...teachers, data]);
                 setNewTeacher({ name: '', subject: '' });
-                setSuccessMessage('Teacher added successfully!');
-                setTimeout(() => setSuccessMessage(''), 3000);
+                setLoading(false);
+                setIsModalOpen(false); // Close modal on success
             })
             .catch(error => {
-                setErrorMessage('Error adding teacher');
-                setTimeout(() => setErrorMessage(''), 3000);
                 console.error('Error adding teacher:', error);
+                setLoading(false);
             });
     };
 
     return (
-        <div className="teachers-container">
-            <h2 className="heading">Teacher List</h2>
-            <ul className="teacher-list">
+        <div>
+            <h2>Teachers List</h2>
+            <ul>
                 {teachers.map(teacher => (
-                    <li key={teacher.id} className="teacher-card">
-                        <div className="teacher-info">
-                            <span className="teacher-name">{teacher.name}</span>
-                            <span className="teacher-subject">Subject: {teacher.subject}</span>
-                        </div>
-                    </li>
+                    <li key={teacher.id}>{teacher.name} - {teacher.subject}</li>
                 ))}
             </ul>
+            <button onClick={() => setIsModalOpen(true)}>Add Teacher</button>
 
-            {successMessage && <div className="success-message">{successMessage}</div>}
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
-
-            <form className="teacher-form" onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="name"
-                    value={newTeacher.name}
-                    onChange={handleInputChange}
-                    placeholder="Teacher Name"
-                    required
-                />
-                <input
-                    type="text"
-                    name="subject"
-                    value={newTeacher.subject}
-                    onChange={handleInputChange}
-                    placeholder="Subject"
-                    required
-                />
-                <button type="submit">Add Teacher</button>
-            </form>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                <h3>Add Teacher</h3>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        name="name"
+                        value={newTeacher.name}
+                        onChange={handleInputChange}
+                        placeholder="Teacher Name"
+                        required
+                    />
+                    <input
+                        type="text"
+                        name="subject"
+                        value={newTeacher.subject}
+                        onChange={handleInputChange}
+                        placeholder="Subject"
+                        required
+                    />
+                    <button type="submit" disabled={loading}>
+                        {loading ? 'Saving...' : 'Save Teacher'}
+                    </button>
+                </form>
+            </Modal>
         </div>
     );
 };

@@ -1,17 +1,18 @@
+// Modal.js
 import React from 'react';
 import './Modal.css';
 
-const Modal = ({ show, onClose, children }) => {
-  if (!show) return null;
+const Modal = ({ children, isOpen, onClose }) => {
+    if (!isOpen) return null;
 
-  return (
-    <div className="modal-overlay">
-      <div className="modal-container">
-        <button className="close-btn" onClick={onClose}>X</button>
-        {children}
-      </div>
-    </div>
-  );
+    return (
+        <div className="modal-overlay">
+            <div className="modal-content">
+                <button className="close-btn" onClick={onClose}>X</button>
+                {children}
+            </div>
+        </div>
+    );
 };
 
 export default Modal;
