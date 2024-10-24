@@ -8,10 +8,18 @@
 
 .collapsed .sidebar {
     width: 80px;
+    transition: width 0.3s ease-in-out;
+}
+.collapsed .sidebar h3 {
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Prevents text overflow */
 }
 
 .collapsed .sidebar-links a {
     text-align: center;
+
 }
 
 .collapsed .sidebar-links a span {
@@ -20,7 +28,15 @@
 
 .collapsed .content-container {
     margin-left: 80px;
+    transition: margin-left 0.3s ease-in-out;
 }
+.sidebar {
+    width: 250px;
+    transition: width 0.3s ease-in-out;
+    background-color: blue;
+    color: white;
+}
+
 
 .content-container {
     flex-grow: 1;
@@ -159,3 +175,52 @@ form button:hover {
         font-size: 24px;
     }
 }
+/* App.css */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .login-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  .login-container input {
+    padding: 10px;
+    margin: 5px 0;
+    width: 200px;
+  }
+  
+  .login-container button {
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .app-container {
+    display: flex;
+  }
+  /* App.css */
+.logout-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #3643f4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .logout-button:hover {
+    background-color: #2f2fd3;
+  }
+  
+  
+
+
+  
