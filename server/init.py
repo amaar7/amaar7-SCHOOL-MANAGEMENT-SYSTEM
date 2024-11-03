@@ -4,17 +4,24 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_login import LoginManager
-from models import db, User  # Ensure User is imported if you are referencing it
+from models import db, User
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/school.db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = 'your_secret_key_here'  # Required for session management
 
+    # Ensure the 'instance' directory exists
+    instance_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance')
+    os.makedirs(instance_path, exist_ok=True)
+    
+    # Set SQLAlchemy database URI and configuration
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(instance_path, "school.db")}'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = 'thisisthesecretkey'
+
+    # Initialize extensions
     db.init_app(app)
     migrate = Migrate(app, db)
-    CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})  # Allow CORS for frontend
+    CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
     # Initialize LoginManager
     login_manager = LoginManager()
