@@ -3,7 +3,7 @@ import Modal from './Modal';  // Reusable modal component
 
 const Classes = () => {
     const [classes, setClasses] = useState([]);
-    const [newClass, setNewClass] = useState({ name: '', teacher: '' });
+    const [newClass, setNewClass] = useState({ name: '', teacher_id: '' });
     const [loading, setLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -32,10 +32,15 @@ const Classes = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newClass),
         })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error adding class');
+                }
+                return response.json();
+            })
             .then(data => {
                 setClasses([...classes, data]);
-                setNewClass({ name: '', teacher: '' });
+                setNewClass({ name: '', teacher_id: '' });
                 setLoading(false);
                 setIsModalOpen(false);
             })
@@ -50,7 +55,7 @@ const Classes = () => {
             <h2>Class List</h2>
             <ul>
                 {classes.map(cls => (
-                    <li key={cls.id}>{cls.name} - Teacher: {cls.teacher}</li>
+                    <li key={cls.id}>{cls.name} - Teacher ID: {cls.teacher_id}</li>
                 ))}
             </ul>
             <button onClick={() => setIsModalOpen(true)}>Add Class</button>
@@ -68,10 +73,10 @@ const Classes = () => {
                     />
                     <input
                         type="text"
-                        name="teacher"
-                        value={newClass.teacher}
+                        name="teacher_id"
+                        value={newClass.teacher_id}
                         onChange={handleInputChange}
-                        placeholder="Teacher"
+                        placeholder="Teacher ID"
                         required
                     />
                     <button type="submit" disabled={loading}>

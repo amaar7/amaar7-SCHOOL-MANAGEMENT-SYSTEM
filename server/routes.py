@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
-from models import db, Student, Teacher, Class, Grade, Attendance
+from models import db, Student, Teacher, Class, Grade, Attendance, Event
+from datetime import datetime
 
 main = Blueprint('main', __name__)
 
@@ -142,6 +143,46 @@ def add_grade():
     try:
         db.session.commit()
         return jsonify({"message": "Grade added successfully"}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+# Routes for Events
+@main.route('/events', methods=['GET'])
+def get_events():
+    events = Event.query.all()
+    result = [
+        {
+            "id": event.id,
+            "title": event.title,
+            "description": event.description,
+            "date": str(event.date),
+            "location": event.location
+        }
+        for event in events
+    ]
+    return jsonify(result), 200
+
+@main.route('/events', methods=['POST'])
+def add_event():
+    data = request.get_json()
+    title = data.get('title')
+    description = data.get('description')
+    location = data.get('location')
+    date_str = data.get('date')
+
+    # Convert date string to a Python date object
+    try:
+        date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
+    except ValueError:
+        return jsonify({"error": "Invalid date format. Use YYYY-MM-DD."}), 400
+
+    new_event = Event(title=title, description=description, location=location, date=date_obj)
+    db.session.add(new_event)
+
+    try:
+        db.session.commit()
+        return jsonify({"message": "Event added successfully"}), 201
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
