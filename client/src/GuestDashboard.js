@@ -1,33 +1,41 @@
-// GuestDashboard.js
-import React from 'react';
+import React, { useState } from 'react';
+import Sidebar from './Sidebar';
 import StudentList from './StudentList';
 import ClassList from './ClassList';
 import TeacherList from './TeacherList';
 import GradeList from './GradeList';
 import EventList from './EventList';
+import './GuestDashboard.css';
 
-function GuestDashboard() {
+const GuestDashboard = () => {
+  const [selectedSection, setSelectedSection] = useState('Dashboard');
+
+  const renderContent = () => {
+    switch (selectedSection) {
+      case 'Students':
+        return <StudentList />;
+      case 'Classes':
+        return <ClassList />;
+      case 'Teachers':
+        return <TeacherList />;
+      case 'Grades':
+        return <GradeList />;
+      case 'Events':
+        return <EventList />;
+      default:
+        return <p>Welcome, Guest! You have limited access to view information.</p>;
+    }
+  };
+
   return (
-    <div>
-      <h1>Guest Dashboard</h1>
-      <p>Welcome, Guest! You have limited access to view information.</p>
-
-      <h2>Students</h2>
-      <StudentList />
-
-      <h2>Classes</h2>
-      <ClassList />
-
-      <h2>Teachers</h2>
-      <TeacherList />
-
-      <h2>Grades</h2>
-      <GradeList />
-
-      <h2>Events</h2>
-      <EventList />
+    <div className="guest-dashboard">
+      <Sidebar onSectionSelect={setSelectedSection} />
+      <div className="content-section">
+        <h1>{selectedSection}</h1>
+        {renderContent()}
+      </div>
     </div>
   );
-}
+};
 
 export default GuestDashboard;

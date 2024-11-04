@@ -6,6 +6,7 @@ import StudentDashboard from './StudentDashboard';
 import GuestDashboard from './GuestDashboard';
 import Login from './Login';
 import Register from './Register';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
   const [role, setRole] = useState(null); // State to manage the user's role
