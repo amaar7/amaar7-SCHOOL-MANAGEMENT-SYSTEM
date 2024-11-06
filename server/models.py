@@ -13,8 +13,9 @@ class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     grade = db.Column(db.String(10), nullable=False)
-    attendance = db.relationship('Attendance', backref='student', lazy=True)
-    grades = db.relationship('Grade', backref='student', lazy=True)
+    attendance = db.relationship('Attendance', backref='student', lazy=True, cascade="all, delete-orphan")
+    grades = db.relationship('Grade', backref='student', lazy=True, cascade="all, delete-orphan")
+
 
 class Teacher(db.Model):
     id = db.Column(db.Integer, primary_key=True)

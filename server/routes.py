@@ -16,7 +16,7 @@ def add_student():
     data = request.get_json()
     name = data.get('name')
     grade = data.get('grade')
-
+    
     if not name or not grade:
         return jsonify({"error": "Student name and grade are required"}), 400
 
@@ -29,6 +29,22 @@ def add_student():
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
+
+@main.route('/students/<int:id>', methods=['DELETE'])
+def delete_student(id):
+    student = Student.query.get(id)
+    if student is None:
+        return jsonify({"error": "Student not found"}), 404
+
+    try:
+        db.session.delete(student)
+        db.session.commit()
+        return jsonify({"message": "Student deleted successfully"}), 200
+    except Exception as e:
+        db.session.rollback()
+        # Print detailed error info to debug further
+        print(f"Error deleting student ID {id}: {e.__class__.__name__} - {e}")
+        return jsonify({"error": "Failed to delete student due to database constraints"}), 500
 
 # Routes for Teachers
 @main.route('/teachers', methods=['GET'])
@@ -52,6 +68,19 @@ def add_teacher():
     try:
         db.session.commit()
         return jsonify({"message": "Teacher added successfully"}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+@main.route('/teachers/<int:id>', methods=['DELETE'])
+def delete_teacher(id):
+    teacher = Teacher.query.get(id)
+    if not teacher:
+        return jsonify({"error": "Teacher not found"}), 404
+    db.session.delete(teacher)
+    try:
+        db.session.commit()
+        return jsonify({"message": "Teacher deleted successfully"}), 200
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
@@ -82,17 +111,25 @@ def add_class():
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
+@main.route('/classes/<int:id>', methods=['DELETE'])
+def delete_class(id):
+    cls = Class.query.get(id)
+    if not cls:
+        return jsonify({"error": "Class not found"}), 404
+    db.session.delete(cls)
+    try:
+        db.session.commit()
+        return jsonify({"message": "Class deleted successfully"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
 # Routes for Attendance
 @main.route('/attendance', methods=['GET'])
 def get_attendance():
     attendance_records = Attendance.query.all()
     result = [
-        {
-            "id": record.id,
-            "student_id": record.student_id,
-            "status": record.status,
-            "date": str(record.date)
-        }
+        {"id": record.id, "student_id": record.student_id, "status": record.status, "date": str(record.date)}
         for record in attendance_records
     ]
     return jsonify(result), 200
@@ -113,6 +150,19 @@ def add_attendance():
     try:
         db.session.commit()
         return jsonify({"message": "Attendance record added successfully"}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+@main.route('/attendance/<int:id>', methods=['DELETE'])
+def delete_attendance(id):
+    record = Attendance.query.get(id)
+    if not record:
+        return jsonify({"error": "Attendance record not found"}), 404
+    db.session.delete(record)
+    try:
+        db.session.commit()
+        return jsonify({"message": "Attendance record deleted successfully"}), 200
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
@@ -147,18 +197,25 @@ def add_grade():
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
+@main.route('/grades/<int:id>', methods=['DELETE'])
+def delete_grade(id):
+    grade = Grade.query.get(id)
+    if not grade:
+        return jsonify({"error": "Grade not found"}), 404
+    db.session.delete(grade)
+    try:
+        db.session.commit()
+        return jsonify({"message": "Grade deleted successfully"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
 # Routes for Events
 @main.route('/events', methods=['GET'])
 def get_events():
     events = Event.query.all()
     result = [
-        {
-            "id": event.id,
-            "title": event.title,
-            "description": event.description,
-            "date": str(event.date),
-            "location": event.location
-        }
+        {"id": event.id, "title": event.title, "description": event.description, "date": str(event.date), "location": event.location}
         for event in events
     ]
     return jsonify(result), 200
@@ -171,7 +228,6 @@ def add_event():
     location = data.get('location')
     date_str = data.get('date')
 
-    # Convert date string to a Python date object
     try:
         date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
     except ValueError:
@@ -183,6 +239,19 @@ def add_event():
     try:
         db.session.commit()
         return jsonify({"message": "Event added successfully"}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+@main.route('/events/<int:id>', methods=['DELETE'])
+def delete_event(id):
+    event = Event.query.get(id)
+    if not event:
+        return jsonify({"error": "Event not found"}), 404
+    db.session.delete(event)
+    try:
+        db.session.commit()
+        return jsonify({"message": "Event deleted successfully"}), 200
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
