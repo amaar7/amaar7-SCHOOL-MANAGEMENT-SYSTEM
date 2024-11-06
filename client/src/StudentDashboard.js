@@ -1,14 +1,33 @@
-// StudentDashboard.js
-import React from 'react';
-import Classes from './Classes';
-import Grades from './Grades';
+import React, { useState } from 'react';
+import StudentSidebar from './StudentSidebar';
+import ClassList from './ClassList';
+import StudentList from './StudentList';
+import EventList from './EventList';
+import './Dashboard.css';
 
 function StudentDashboard() {
+  const [selectedSection, setSelectedSection] = useState('Dashboard');
+
+  const renderContent = () => {
+    switch (selectedSection) {
+      case 'Students':
+        return <StudentList />;
+      case 'Classes':
+          return <ClassList />;
+      case 'Events':
+        return <EventList />;
+      default:
+        return <p>Welcome to the Student Dashboard!</p>;
+    }
+  };
+
   return (
-    <div>
-      <h1>Student Dashboard</h1>
-      <Classes />
-      <Grades />
+    <div className="dashboard-container">
+      <StudentSidebar onSectionSelect={setSelectedSection} />
+      <div className="content-section">
+        <h1>Student Dashboard - {selectedSection}</h1>
+        {renderContent()}
+      </div>
     </div>
   );
 }
