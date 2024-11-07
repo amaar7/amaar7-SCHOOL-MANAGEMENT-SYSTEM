@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, Link } from 'react-router-dom';
 import AdminDashboard from './AdminDashboard';
 import TeacherDashboard from './TeacherDashboard';
 import StudentDashboard from './StudentDashboard';
@@ -19,9 +19,11 @@ function App() {
   return (
     <Router>
       <div>
-        <button onClick={handleLogout}>Logout</button>
+        {/* Show logout button only if user is logged in */}
+        {role && <button onClick={handleLogout}>Logout</button>}
+
         <Routes>
-          {/* Fallback route for "/" */}
+          {/* Home Route: Redirects based on role or shows login */}
           <Route
             path="/"
             element={
@@ -32,15 +34,17 @@ function App() {
                 role === 'student' ? <Navigate to="/student_dashboard" /> :
                 <Navigate to="/guest_dashboard" />
               ) : (
-                // Show login and registration if no user is logged in
-                <>
-                  <Login setRole={setRole} />
-                  <Register />
-                </>
+                <Navigate to="/login" />
               )
             }
           />
           
+          {/* Login Route */}
+          <Route path="/login" element={<Login setRole={setRole} />} />
+
+          {/* Register Route */}
+          <Route path="/register" element={<Register />} />
+
           {/* Specific dashboard routes for each role */}
           <Route path="/admin_dashboard" element={role === 'admin' ? <AdminDashboard /> : <Navigate to="/" />} />
           <Route path="/teacher_dashboard" element={role === 'teacher' ? <TeacherDashboard /> : <Navigate to="/" />} />

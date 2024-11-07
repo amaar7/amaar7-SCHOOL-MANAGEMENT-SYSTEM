@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 const Login = ({ setRole }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -19,6 +23,7 @@ const Login = ({ setRole }) => {
       if (response.ok) {
         setRole(data.role);
         alert("Logged in successfully");
+        navigate('/');
       } else {
         alert("Login failed: " + (data.error || "Unknown error"));
       }
@@ -43,6 +48,7 @@ const Login = ({ setRole }) => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleLogin}>Login</button>
+      <p>Don't have an account? <Link to="/register">Register here</Link></p>
     </div>
   );
 };

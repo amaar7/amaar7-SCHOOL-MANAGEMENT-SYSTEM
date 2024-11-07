@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('guest');
+  const navigate = useNavigate();
 
   const handleRegister = async () => {
     try {
@@ -19,6 +23,7 @@ const Register = () => {
 
       if (response.ok) {
         alert(data.message || "Registration successful");
+        navigate('/login');
       } else {
         alert("Registration failed: " + (data.error || "Unknown error"));
       }
@@ -49,6 +54,7 @@ const Register = () => {
         <option value="admin">Admin</option>
       </select>
       <button onClick={handleRegister}>Register</button>
+      <p>Already have an account? <Link to="/login">Login here</Link></p>
     </div>
   );
 };
