@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Attendance.css';
 
 const Attendance = () => {
     const [attendance, setAttendance] = useState([]);
@@ -6,16 +7,23 @@ const Attendance = () => {
     const [students, setStudents] = useState([]);
 
     useEffect(() => {
+        fetchAttendance();
+        fetchStudents();
+    }, []);
+
+    const fetchAttendance = () => {
         fetch('http://localhost:5000/attendance')
             .then(response => response.json())
             .then(data => setAttendance(data))
             .catch(error => console.error('Error fetching attendance:', error));
+    };
 
+    const fetchStudents = () => {
         fetch('http://localhost:5000/students')
             .then(response => response.json())
             .then(data => setStudents(data))
             .catch(error => console.error('Error fetching students:', error));
-    }, []);
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -38,19 +46,41 @@ const Attendance = () => {
             .catch(error => console.error('Error recording attendance:', error));
     };
 
+    const handleDelete = (id) => {
+        fetch(`http://localhost:5000/attendance/${id}`, {
+            method: 'DELETE',
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Failed to delete attendance record');
+                }
+                setAttendance(attendance.filter(record => record.id !== id));
+            })
+            .catch(error => console.error('Error deleting attendance record:', error));
+    };
+    
+
     return (
-        <div>
-            <h2>Attendance List</h2>
-            <ul>
+        <div className="attendance-container">
+            <h2 className="heading">Attendance List</h2>
+            <ul className="attendance-list">
                 {attendance.map(att => (
-                    <li key={att.id}>
-                        {att.date} - Student ID: {att.student_id} - Status: {att.status}
+                    <li key={att.id} className="attendance-card">
+                        <div className="attendance-info">
+                            <span>{att.date} - Student ID: {att.student_id} - Status: {att.status}</span>
+                        </div>
+                        <button
+                            className="delete-button"
+                            onClick={() => handleDelete(att.id)}
+                        >
+                            Delete
+                        </button>
                     </li>
                 ))}
             </ul>
 
-            <h2>Record New Attendance</h2>
-            <form onSubmit={handleSubmit}>
+            <h2 className="heading">Record New Attendance</h2>
+            <form className="attendance-form" onSubmit={handleSubmit}>
                 <input
                     type="date"
                     name="date"

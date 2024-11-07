@@ -1,4 +1,4 @@
-.teachers-container {
+.events-container {
     background-color: white;
     padding: 30px;
     border-radius: 12px;
@@ -15,14 +15,14 @@
     margin-bottom: 20px;
 }
 
-.teacher-list {
+.event-list {
     margin: 20px 0;
     padding: 0;
     list-style: none;
 }
 
-.teacher-card {
-    background-color: #e8f4f8;
+.event-card {
+    background-color: #f0f8ff;
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 8px;
@@ -30,43 +30,48 @@
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.teacher-card:hover {
+.event-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.teacher-info {
+.event-info {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.teacher-name {
+.event-title {
     font-weight: bold;
     color: #333;
 }
 
-.teacher-subject {
+.event-date,
+.event-location,
+.event-description {
     color: #666;
 }
 
-.teacher-form {
+.event-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.teacher-form input {
+.event-form input,
+.event-form textarea {
     padding: 12px;
     border-radius: 8px;
     border: 1px solid #ccc;
     transition: border-color 0.3s;
 }
 
-.teacher-form input:focus {
+.event-form input:focus,
+.event-form textarea:focus {
     border-color: #008080;
 }
 
-.teacher-form button {
+.event-form button {
     padding: 12px;
     background-color: #008080;
     color: white;
@@ -76,7 +81,7 @@
     transition: background-color 0.3s;
 }
 
-.teacher-form button:hover {
+.event-form button:hover {
     background-color: #006666;
 }
 
@@ -84,28 +89,23 @@
     background-color: #ff4d4d;
     color: white;
     border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
+    padding: 10px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
 .delete-button:hover {
     background-color: #cc0000;
 }
 
-/* Responsive Styles */
-@media screen and (max-width: 768px) {
-    .teachers-container {
-        padding: 20px;
-    }
-
-    .teacher-form input,
-    .teacher-form button {
-        padding: 10px;
-    }
-
-    .teacher-card {
-        padding: 10px;
-    }
+/* Success Message */
+.success-message {
+    background-color: #e0f7fa;
+    color: #00796b;
+    margin: 10px 0;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
 }

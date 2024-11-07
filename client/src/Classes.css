@@ -1,8 +1,18 @@
 .classes-container {
     background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+    font-size: 1.8em;
+    margin-bottom: 20px;
 }
 
 .class-list {
@@ -13,44 +23,89 @@
 
 .class-card {
     background-color: #f1f8e9;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 15px;
     margin-bottom: 10px;
+    border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.class-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.class-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.class-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.class-teacher {
+    color: #666;
 }
 
 .class-form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
-.class-form input,
-.class-form button {
-    padding: 10px;
-    border-radius: 5px;
+.class-form input {
+    padding: 12px;
+    border-radius: 8px;
     border: 1px solid #ccc;
+    transition: border-color 0.3s;
+}
+
+.class-form input:focus {
+    border-color: #4CAF50;
 }
 
 .class-form button {
+    padding: 12px;
     background-color: #4CAF50;
     color: white;
-    cursor: pointer;
     border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .class-form button:hover {
     background-color: #388E3C;
 }
 
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
-    .class-card {
-        padding: 8px;
+    .classes-container {
+        padding: 20px;
     }
 
     .class-form input,
     .class-form button {
-        padding: 8px;
+        padding: 10px;
+    }
+
+    .class-card {
+        padding: 10px;
     }
 }

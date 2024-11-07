@@ -6,7 +6,6 @@ import Classes from './Classes';
 import Attendance from './Attendance';
 import Grades from './Grades';
 import EventForm from './EventForm';
-import EventList from './EventList';
 import './Dashboard.css';
 
 function AdminDashboard() {
@@ -27,7 +26,6 @@ function AdminDashboard() {
       case 'Events':
         return (
           <>
-            <EventList />
             <EventForm />
           </>
         );

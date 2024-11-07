@@ -1,4 +1,4 @@
-.teachers-container {
+.attendance-container {
     background-color: white;
     padding: 30px;
     border-radius: 12px;
@@ -15,14 +15,14 @@
     margin-bottom: 20px;
 }
 
-.teacher-list {
+.attendance-list {
     margin: 20px 0;
     padding: 0;
     list-style: none;
 }
 
-.teacher-card {
-    background-color: #e8f4f8;
+.attendance-card {
+    background-color: #f9f9e9;
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 8px;
@@ -30,45 +30,37 @@
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.teacher-card:hover {
+.attendance-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.teacher-info {
+.attendance-info {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.teacher-name {
-    font-weight: bold;
-    color: #333;
-}
-
-.teacher-subject {
-    color: #666;
-}
-
-.teacher-form {
+.attendance-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.teacher-form input {
+.attendance-form select, .attendance-form input {
     padding: 12px;
     border-radius: 8px;
     border: 1px solid #ccc;
     transition: border-color 0.3s;
 }
 
-.teacher-form input:focus {
-    border-color: #008080;
+.attendance-form input:focus, .attendance-form select:focus {
+    border-color: #FFA726;
 }
 
-.teacher-form button {
+.attendance-form button {
     padding: 12px;
-    background-color: #008080;
+    background-color: #FFA726;
     color: white;
     border: none;
     border-radius: 8px;
@@ -76,8 +68,8 @@
     transition: background-color 0.3s;
 }
 
-.teacher-form button:hover {
-    background-color: #006666;
+.attendance-form button:hover {
+    background-color: #FB8C00;
 }
 
 .delete-button {
@@ -96,16 +88,15 @@
 
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
-    .teachers-container {
+    .attendance-container {
         padding: 20px;
     }
 
-    .teacher-form input,
-    .teacher-form button {
+    .attendance-form input, .attendance-form button {
         padding: 10px;
     }
 
-    .teacher-card {
+    .attendance-card {
         padding: 10px;
     }
 }

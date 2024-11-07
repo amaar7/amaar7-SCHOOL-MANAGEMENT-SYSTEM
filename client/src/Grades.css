@@ -1,4 +1,4 @@
-.teachers-container {
+.grades-container {
     background-color: white;
     padding: 30px;
     border-radius: 12px;
@@ -15,14 +15,14 @@
     margin-bottom: 20px;
 }
 
-.teacher-list {
+.grade-list {
     margin: 20px 0;
     padding: 0;
     list-style: none;
 }
 
-.teacher-card {
-    background-color: #e8f4f8;
+.grade-card {
+    background-color: #f1f8e9;
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 8px;
@@ -30,45 +30,42 @@
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.teacher-card:hover {
+.grade-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.teacher-info {
+.grade-info {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.teacher-name {
-    font-weight: bold;
+.grade-student, .grade-subject, .grade-score {
     color: #333;
+    font-weight: bold;
 }
 
-.teacher-subject {
-    color: #666;
-}
-
-.teacher-form {
+.grade-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.teacher-form input {
+.grade-form select, .grade-form input {
     padding: 12px;
     border-radius: 8px;
     border: 1px solid #ccc;
     transition: border-color 0.3s;
 }
 
-.teacher-form input:focus {
-    border-color: #008080;
+.grade-form input:focus, .grade-form select:focus {
+    border-color: #4CAF50;
 }
 
-.teacher-form button {
+.grade-form button {
     padding: 12px;
-    background-color: #008080;
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 8px;
@@ -76,8 +73,8 @@
     transition: background-color 0.3s;
 }
 
-.teacher-form button:hover {
-    background-color: #006666;
+.grade-form button:hover {
+    background-color: #388E3C;
 }
 
 .delete-button {
@@ -96,16 +93,15 @@
 
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
-    .teachers-container {
+    .grades-container {
         padding: 20px;
     }
 
-    .teacher-form input,
-    .teacher-form button {
+    .grade-form input, .grade-form button {
         padding: 10px;
     }
 
-    .teacher-card {
+    .grade-card {
         padding: 10px;
     }
 }

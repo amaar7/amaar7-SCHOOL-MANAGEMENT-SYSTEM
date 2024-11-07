@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from './Modal';
+import './Grades.css';
 
 const Grades = () => {
     const [grades, setGrades] = useState([]);
@@ -54,21 +55,42 @@ const Grades = () => {
             });
     };
 
+    const handleDelete = (id) => {
+        fetch(`http://localhost:5000/grades/${id}`, {
+            method: 'DELETE',
+        })
+            .then(() => {
+                setGrades(grades.filter(grade => grade.id !== id));
+            })
+            .catch(error => console.error('Error deleting grade:', error));
+    };
+
     return (
-        <div>
-            <h2>Grades List</h2>
-            <ul>
+        <div className="grades-container">
+            <h2 className="heading">Grades List</h2>
+            <ul className="grade-list">
                 {grades.map(grade => (
-                    <li key={grade.id}>
-                        Student ID: {grade.student_id} - Subject: {grade.subject} - Score: {grade.score}
+                    <li key={grade.id} className="grade-card">
+                        <div className="grade-info">
+                            <span className="grade-student">Student ID: {grade.student_id}</span>
+                            <span className="grade-subject">Subject: {grade.subject}</span>
+                            <span className="grade-score">Score: {grade.score}</span>
+                        </div>
+                        <button
+                            className="delete-button"
+                            onClick={() => handleDelete(grade.id)}
+                        >
+                            Delete
+                        </button>
                     </li>
                 ))}
             </ul>
+
             <button onClick={() => setIsModalOpen(true)}>Add Grade</button>
 
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <h3>Add Grade</h3>
-                <form onSubmit={handleSubmit}>
+                <form className="grade-form" onSubmit={handleSubmit}>
                     <select
                         name="student_id"
                         value={newGrade.student_id}

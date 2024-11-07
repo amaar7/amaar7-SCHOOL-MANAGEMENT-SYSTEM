@@ -141,10 +141,16 @@ def add_attendance():
     status = data.get('status')
     date = data.get('date')
 
+    # Check if required data is present
     if not student_id or not status or not date:
         return jsonify({"error": "Student ID, status, and date are required"}), 400
 
-    new_record = Attendance(student_id=student_id, status=status, date=date)
+    try:
+        date_obj = datetime.strptime(date, '%Y-%m-%d').date()
+    except ValueError:
+        return jsonify({"error": "Invalid date format. Use YYYY-MM-DD."}), 400
+
+    new_record = Attendance(student_id=student_id, status=status, date=date_obj)
     db.session.add(new_record)
 
     try:
@@ -154,11 +160,13 @@ def add_attendance():
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
+
 @main.route('/attendance/<int:id>', methods=['DELETE'])
 def delete_attendance(id):
     record = Attendance.query.get(id)
     if not record:
         return jsonify({"error": "Attendance record not found"}), 404
+
     db.session.delete(record)
     try:
         db.session.commit()
@@ -166,6 +174,7 @@ def delete_attendance(id):
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
+
 
 # Routes for Grades
 @main.route('/grades', methods=['GET'])

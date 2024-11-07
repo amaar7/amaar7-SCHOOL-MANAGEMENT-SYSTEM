@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Modal from './Modal';  // Reusable modal component
+import Modal from './Modal';
+import './Classes.css';
 
 const Classes = () => {
     const [classes, setClasses] = useState([]);
@@ -50,19 +51,44 @@ const Classes = () => {
             });
     };
 
+    const handleDelete = (id) => {
+        fetch(`http://localhost:5000/classes/${id}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error deleting class');
+                }
+                setClasses(classes.filter(cls => cls.id !== id));
+            })
+            .catch(error => console.error('Error deleting class:', error));
+    };
+
     return (
-        <div>
-            <h2>Class List</h2>
-            <ul>
+        <div className="classes-container">
+            <h2 className="heading">Class List</h2>
+            <ul className="class-list">
                 {classes.map(cls => (
-                    <li key={cls.id}>{cls.name} - Teacher ID: {cls.teacher_id}</li>
+                    <li key={cls.id} className="class-card">
+                        <div className="class-info">
+                            <span className="class-name">{cls.name}</span>
+                            <span className="class-teacher">Teacher ID: {cls.teacher_id}</span>
+                        </div>
+                        <button
+                            className="delete-button"
+                            onClick={() => handleDelete(cls.id)}
+                        >
+                            Delete
+                        </button>
+                    </li>
                 ))}
             </ul>
-            <button onClick={() => setIsModalOpen(true)}>Add Class</button>
+
+            <button onClick={() => setIsModalOpen(true)}>Add New Class</button>
 
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <h3>Add Class</h3>
-                <form onSubmit={handleSubmit}>
+                <form className="class-form" onSubmit={handleSubmit}>
                     <input
                         type="text"
                         name="name"
