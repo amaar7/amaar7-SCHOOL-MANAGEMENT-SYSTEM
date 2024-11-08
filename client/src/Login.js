@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-
+import { useNavigate, Link } from 'react-router-dom';
+import './Login.css';
 
 const Login = ({ setRole }) => {
   const [username, setUsername] = useState('');
@@ -33,7 +32,7 @@ const Login = ({ setRole }) => {
   };
 
   return (
-    <div>
+    <div className="auth-container">
       <h2>Login</h2>
       <input
         type="text"
