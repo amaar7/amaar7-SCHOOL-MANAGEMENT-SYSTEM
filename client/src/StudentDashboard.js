@@ -5,7 +5,7 @@ import StudentList from './StudentList';
 import EventList from './EventList';
 import './Dashboard.css';
 
-function StudentDashboard() {
+function StudentDashboard({ handleLogout }) {
   const [selectedSection, setSelectedSection] = useState('Dashboard');
 
   const renderContent = () => {
@@ -13,7 +13,7 @@ function StudentDashboard() {
       case 'Students':
         return <StudentList />;
       case 'Classes':
-          return <ClassList />;
+        return <ClassList />;
       case 'Events':
         return <EventList />;
       default:
@@ -23,6 +23,7 @@ function StudentDashboard() {
 
   return (
     <div className="dashboard-container">
+      <button onClick={handleLogout} className="logout-button">Logout</button>
       <StudentSidebar onSectionSelect={setSelectedSection} />
       <div className="content-section">
         <h1>Student Dashboard - {selectedSection}</h1>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AdminSidebar from './AdminSidebar'; 
+import AdminSidebar from './AdminSidebar';
 import Students from './Students';
 import Teachers from './Teachers';
 import Classes from './Classes';
@@ -8,7 +8,7 @@ import Grades from './Grades';
 import EventForm from './EventForm';
 import './Dashboard.css';
 
-function AdminDashboard() {
+function AdminDashboard({ handleLogout }) {
   const [selectedSection, setSelectedSection] = useState('Dashboard');
 
   const renderContent = () => {
@@ -24,11 +24,7 @@ function AdminDashboard() {
       case 'Grades':
         return <Grades />;
       case 'Events':
-        return (
-          <>
-            <EventForm />
-          </>
-        );
+        return <EventForm />;
       default:
         return <p>Welcome to the Admin Dashboard!</p>;
     }
@@ -36,6 +32,7 @@ function AdminDashboard() {
 
   return (
     <div className="dashboard-container">
+      <button onClick={handleLogout} className="logout-button">Logout</button>
       <AdminSidebar onSectionSelect={setSelectedSection} />
       <div className="content-section">
         <h1>Admin Dashboard - {selectedSection}</h1>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import TeacherSidebar from './TeacherSidebar'; // Import the TeacherSidebar
+import TeacherSidebar from './TeacherSidebar';
 import Attendance from './Attendance';
 import Grades from './Grades';
-import ClassList from './ClassList'; // Import ClassList
+import ClassList from './ClassList';
 import EventList from './EventList';
 import './Dashboard.css';
 
-function TeacherDashboard() {
+function TeacherDashboard({ handleLogout }) {
   const [selectedSection, setSelectedSection] = useState('Dashboard');
 
   const renderContent = () => {
@@ -26,6 +26,7 @@ function TeacherDashboard() {
 
   return (
     <div className="dashboard-container">
+      <button onClick={handleLogout} className="logout-button">Logout</button>
       <TeacherSidebar onSectionSelect={setSelectedSection} />
       <div className="content-section">
         <h1>Teacher Dashboard - {selectedSection}</h1>

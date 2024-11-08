@@ -7,7 +7,7 @@ import GradeList from './GradeList';
 import EventList from './EventList';
 import './GuestDashboard.css';
 
-const GuestDashboard = () => {
+const GuestDashboard = ({ handleLogout }) => {
   const [selectedSection, setSelectedSection] = useState('Dashboard');
 
   const renderContent = () => {
@@ -29,6 +29,7 @@ const GuestDashboard = () => {
 
   return (
     <div className="guest-dashboard">
+      <button onClick={handleLogout} className="logout-button">Logout</button>
       <Sidebar onSectionSelect={setSelectedSection} />
       <div className="content-section">
         <h1>{selectedSection}</h1>
