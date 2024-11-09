@@ -1,12 +1,16 @@
 .dashboard-container {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
 }
 
 .content-section {
     margin-left: 260px;
     padding: 30px;
     width: 100%;
+    overflow-y: auto; 
+    background-color: #f0f4f8;
+    box-sizing: border-box;
 }
 
 .list-container {
@@ -20,17 +24,32 @@
     transition: all 0.3s ease-in-out;
 }
 
+.item-list {
+    max-height: 420px;
+    overflow-y: auto; 
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.item-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.item-list::-webkit-scrollbar-track {
+    background: #f0f4f8;
+}
+
+.item-list::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
 .heading {
     text-align: center;
     color: #e2b9b9;
     font-size: 1.8em;
     margin-bottom: 20px;
-}
-
-.item-list {
-    margin: 20px 0;
-    padding: 0;
-    list-style: none;
 }
 
 .item-card {
@@ -62,20 +81,6 @@
 
 .item-detail {
     color: #666;
-}
-
-.delete-button {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.delete-button:hover {
-    background-color: #d94444;
 }
 
 .logout-button {
