@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './ListStyles.css';
 
 const ClassList = () => {
   const [classes, setClasses] = useState([]);
@@ -11,12 +12,15 @@ const ClassList = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Classes</h2>
-      <ul>
+    <div className="list-container">
+      <h2 className="list-heading">Classes</h2>
+      <ul className="item-list">
         {classes.map(cls => (
-          <li key={cls.id}>
-            {cls.name} - Teacher ID: {cls.teacher_id}
+          <li key={cls.id} className="item-card">
+            <div className="item-info">
+              <span className="item-name">{cls.name}</span>
+              <span className="item-detail">Teacher ID: {cls.teacher_id}</span>
+            </div>
           </li>
         ))}
       </ul>

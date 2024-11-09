@@ -38,6 +38,7 @@
 .attendance-info {
     display: flex;
     flex-direction: column;
+    color: #333;
     gap: 5px;
 }
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './ListStyles.css';
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
@@ -11,15 +12,17 @@ const EventList = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Events</h2>
-      <ul>
+    <div className="list-container">
+      <h2 className="list-heading">Events</h2>
+      <ul className="item-list">
         {events.map(event => (
-          <li key={event.id}>
-            <h3>{event.title}</h3>
-            <p>{event.description}</p>
-            <p>Date: {event.date}</p>
-            <p>Location: {event.location}</p>
+          <li key={event.id} className="item-card">
+            <div className="item-info">
+              <h3 className="item-name">{event.title}</h3>
+              <p className="event-description">{event.description}</p>
+              <p className="item-detail">Date: {event.date}</p>
+              <p className="item-detail">Location: {event.location}</p>
+            </div>
           </li>
         ))}
       </ul>

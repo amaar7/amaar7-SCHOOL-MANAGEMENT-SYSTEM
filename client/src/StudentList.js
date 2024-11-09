@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './ListStyles.css';
 
 const StudentList = () => {
   const [students, setStudents] = useState([]);
@@ -18,15 +19,18 @@ const StudentList = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Students</h2>
+    <div className="list-container">
+      <h2 className="list-heading">Students</h2>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <ul className="item-list">
           {students.map(student => (
-            <li key={student.id}>
-              {student.name} - Grade: {student.grade}
+            <li key={student.id} className="item-card">
+              <div className="item-info">
+                <span className="item-name">{student.name}</span>
+                <span className="item-detail">Grade: {student.grade}</span>
+              </div>
             </li>
           ))}
         </ul>
