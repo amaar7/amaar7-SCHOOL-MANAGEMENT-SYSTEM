@@ -65,6 +65,11 @@ const Grades = () => {
             .catch(error => console.error('Error deleting grade:', error));
     };
 
+    const getStudentName = (id) => {
+        const student = students.find(student => student.id === id);
+        return student ? student.name : 'Unknown Student';
+    };
+
     return (
         <div className="grades-container">
             <h2 className="heading">Grades List</h2>
@@ -72,7 +77,7 @@ const Grades = () => {
                 {grades.map(grade => (
                     <li key={grade.id} className="grade-card">
                         <div className="grade-info">
-                            <span className="grade-student">Student ID: {grade.student_id}</span>
+                            <span className="grade-student">Student: {getStudentName(grade.student_id)}</span>
                             <span className="grade-subject">Subject: {grade.subject}</span>
                             <span className="grade-score">Score: {grade.score}</span>
                         </div>

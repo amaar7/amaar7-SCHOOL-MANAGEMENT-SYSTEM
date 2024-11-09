@@ -50,15 +50,16 @@ const Attendance = () => {
         fetch(`http://localhost:5000/attendance/${id}`, {
             method: 'DELETE',
         })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Failed to delete attendance record');
-                }
+            .then(() => {
                 setAttendance(attendance.filter(record => record.id !== id));
             })
             .catch(error => console.error('Error deleting attendance record:', error));
     };
-    
+
+    const getStudentName = (id) => {
+        const student = students.find(student => student.id === id);
+        return student ? student.name : 'Unknown Student';
+    };
 
     return (
         <div className="attendance-container">
@@ -67,7 +68,7 @@ const Attendance = () => {
                 {attendance.map(att => (
                     <li key={att.id} className="attendance-card">
                         <div className="attendance-info">
-                            <span>{att.date} - Student ID: {att.student_id} - Status: {att.status}</span>
+                            <span>{att.date} - Student: {getStudentName(att.student_id)} - Status: {att.status}</span>
                         </div>
                         <button
                             className="delete-button"
