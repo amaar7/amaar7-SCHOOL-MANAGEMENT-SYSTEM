@@ -17,7 +17,26 @@ function StudentDashboard({ handleLogout }) {
       case 'Events':
         return <EventList />;
       default:
-        return <p>Welcome to the Student Dashboard!</p>;
+        return (
+          <div className="welcome-section">
+            <h2>Welcome, Student!</h2>
+            <p>Here are some actions you can take:</p>
+            <div className="actions-container">
+              <div className="action-card" onClick={() => setSelectedSection('Students')}>
+                <h3>View Your Profile</h3>
+                <p>Check and update your information.</p>
+              </div>
+              <div className="action-card" onClick={() => setSelectedSection('Classes')}>
+                <h3>View Classes</h3>
+                <p>Explore the classes you are enrolled in.</p>
+              </div>
+              <div className="action-card" onClick={() => setSelectedSection('Events')}>
+                <h3>View School Events</h3>
+                <p>See upcoming events and activities.</p>
+              </div>
+            </div>
+          </div>
+        );
     }
   };
 

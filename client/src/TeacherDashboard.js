@@ -20,7 +20,30 @@ function TeacherDashboard({ handleLogout }) {
       case 'Events':
         return <EventList />;
       default:
-        return <p>Welcome to the Teacher Dashboard!</p>;
+        return (
+          <div className="welcome-section">
+            <h2>Welcome, Teacher!</h2>
+            <p>Manage and view relevant information below:</p>
+            <div className="actions-container">
+              <div className="action-card" onClick={() => setSelectedSection('Attendance')}>
+                <h3>Record Attendance</h3>
+                <p>Track and record student attendance.</p>
+              </div>
+              <div className="action-card" onClick={() => setSelectedSection('Grades')}>
+                <h3>View & Assign Grades</h3>
+                <p>Manage student grading records.</p>
+              </div>
+              <div className="action-card" onClick={() => setSelectedSection('Classes')}>
+                <h3>View Classes</h3>
+                <p>See and manage assigned classes.</p>
+              </div>
+              <div className="action-card" onClick={() => setSelectedSection('Events')}>
+                <h3>View School Events</h3>
+                <p>Check upcoming school events.</p>
+              </div>
+            </div>
+          </div>
+        );
     }
   };
 
