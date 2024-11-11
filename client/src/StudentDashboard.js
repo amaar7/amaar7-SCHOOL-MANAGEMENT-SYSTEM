@@ -24,7 +24,7 @@ function StudentDashboard({ handleLogout }) {
             <div className="actions-container">
               <div className="action-card" onClick={() => setSelectedSection('Students')}>
                 <h3>View Your Profile</h3>
-                <p>Check and update your information.</p>
+                <p>Check your personal information.</p>
               </div>
               <div className="action-card" onClick={() => setSelectedSection('Classes')}>
                 <h3>View Classes</h3>

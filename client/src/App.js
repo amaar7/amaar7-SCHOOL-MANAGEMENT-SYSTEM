@@ -13,7 +13,6 @@ function App() {
 
   const handleLogout = () => {
     setRole(null);
-    alert("Logged out successfully");
   };
 
   return (

@@ -9,11 +9,10 @@ from models import db, User
 def create_app():
     app = Flask(__name__)
 
-    # Ensure the 'instance' directory exists
+    # Ensured the 'instance' directory exists
     instance_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance')
     os.makedirs(instance_path, exist_ok=True)
     
-    # Set SQLAlchemy database URI and configuration
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(instance_path, "school.db")}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'thisisthesecretkey'

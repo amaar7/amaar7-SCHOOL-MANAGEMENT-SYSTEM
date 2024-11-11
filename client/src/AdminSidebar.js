@@ -12,7 +12,7 @@ const AdminSidebar = ({ onSectionSelect }) => {
     <div className={`sidebar ${isOpen ? '' : 'close'}`}>
       <div className="logo">
         <i className="fab fa-trade-federation"></i>
-        <span className="logo-name">School Management System</span>
+        <span className="logo-name">School Ms</span>
       </div>
 
       <button id="menu-btn" onClick={toggleSidebar}>
