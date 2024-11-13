@@ -2,6 +2,7 @@
 
 Welcome to the School Management System! This project is a comprehensive web application with a Flask backend and React frontend. It allows administrators, teachers, students, and guests to access and manage school information based on their roles. Whether you’re adding new students, tracking attendance, or checking out the latest school events, this system has you covered.
 
+
 🌟 Features
 
 Admin Dashboard: Manage students, teachers, classes, attendance, grades, and events with full control.
@@ -29,12 +30,14 @@ Python 3 (for the backend)
 Pipenv (for managing the Python virtual environment)
 
 
+
 2. 🖥️ Frontend Setup
 Open a terminal and navigate to the client folder.
 cd client;
 Run the following to install all the necessary dependencies:
 npm install
 This installs everything needed to run the React app on your machine.
+
 
 
 3. 🛠️ Backend Setup
@@ -45,6 +48,8 @@ pipenv shell
 Install backend dependencies with:
 pipenv install
 Once installed, set up your database. The app is configured to use SQLite by default, but you can switch to another database if needed.
+
+
 
 4. 🎉 Running the Application
 To see everything in action, start both the frontend and backend servers.
